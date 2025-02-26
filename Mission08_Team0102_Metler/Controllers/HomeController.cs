@@ -12,6 +12,7 @@ namespace Mission08_Team0102_Metler.Controllers
         {
             _logger = logger;
         }
+        //this is a controller
 
         public IActionResult Index()
         {
