@@ -1,39 +1,52 @@
 @model Mission08_Team0102_Metler.Models.Task
+
 @{
-    ViewData["Title"] = "Create Task";
+    ViewData["Title"] = "Create";
 }
 
-<h2>Create Task</h2>
+<h1>Create</h1>
 
-<form asp-action="Create" method="post" class="row g-3">
-    <div class="col-md-6">
-        <label for="TaskName" class="form-label">Task</label>
-        <input asp-for="TaskName" class="form-control" required />
+<h4>Task</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TaskName" class="control-label"></label>
+                <input asp-for="TaskName" class="form-control" />
+                <span asp-validation-for="TaskName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DueDate" class="control-label"></label>
+                <input asp-for="DueDate" class="form-control" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Quadrant" class="control-label"></label>
+                <input asp-for="Quadrant" class="form-control" />
+                <span asp-validation-for="Quadrant" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <select asp-for="CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Completed" /> @Html.DisplayNameFor(model => model.Completed)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
-    <div class="col-md-6">
-        <label for="DueDate" class="form-label">Due Date</label>
-        <input asp-for="DueDate" type="date" class="form-control" />
-    </div>
-    <div class="col-md-6">
-        <label for="Quadrant" class="form-label">Quadrant</label>
-        <select asp-for="Quadrant" class="form-select" required>
-            <option value="1">Quadrant 1 - Urgent & Important</option>
-            <option value="2">Quadrant 2 - Not Urgent & Important</option>
-            <option value="3">Quadrant 3 - Urgent & Not Important</option>
-            <option value="4">Quadrant 4 - Not Urgent & Not Important</option>
-        </select>
-    </div>
-    <div class="col-md-6">
-        <label for="CategoryId" class="form-label">Category</label>
-        <select asp-for="CategoryId" class="form-select" asp-items="ViewBag.Categories"></select>
-    </div>
-    <div class="col-12">
-        <div class="form-check">
-            <input asp-for="Completed" class="form-check-input" />
-            <label class="form-check-label" for="Completed">Completed</label>
-        </div>
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Save Task</button>
-    </div>
-</form>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
