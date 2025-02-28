@@ -1,0 +1,86 @@
+@model Mission08_Team0102_Metler.Models.Task
+
+@{
+    ViewData["Title"] = "Quadrants View";
+}
+
+<div class="container text-center mt-4">
+    <h2>Tasks</h2>
+
+    <!-- Header Row -->
+    <div class="row border">
+        <div class="col-1 border"></div>
+        <div class="col-5 border fw-bold py-2">Urgent</div>
+        <div class="col-5 border fw-bold py-2">Not Urgent</div>
+    </div>
+
+    <!-- Important Quadrants -->
+    <div class="row border">
+        <!-- Y-Axis Label (Important) -->
+        <div class="col-1 d-flex align-items-center justify-content-center border fw-bold p-0"
+             style="writing-mode: vertical-rl; transform: rotate(180deg);">
+            Important
+        </div>
+        <div class="col-5 border p-3">
+            <h5 class="text-danger">Quadrant I</h5>
+            @foreach (var task in Model.Where(t => t.Quadrant == 1 && !t.Completed))
+            {
+                <div class="d-flex justify-content-between align-items-center border-bottom py-1">
+                    <span>@task.TaskName (Due: @task.DueDate.ToShortDateString())</span>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Update</a>
+                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-5 border p-3">
+            <h5 class="text-primary">Quadrant II</h5>
+            @foreach (var task in Model.Where(t => t.Quadrant == 2 && !t.Completed))
+            {
+                <div class="d-flex justify-content-between align-items-center border-bottom py-1">
+                    <span>@task.TaskName (Due: @task.DueDate.ToShortDateString())</span>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Update</a>
+                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Not Important Quadrants -->
+    <div class="row border">
+        <!-- Y-Axis Label (Not Important) -->
+        <div class="col-1 d-flex align-items-center justify-content-center border fw-bold p-0"
+             style="writing-mode: vertical-rl; transform: rotate(180deg);">
+            Not Important
+        </div>
+        <div class="col-5 border p-3">
+            <h5 class="text-success">Quadrant III</h5>
+            @foreach (var task in Model.Where(t => t.Quadrant == 3 && !t.Completed))
+            {
+                <div class="d-flex justify-content-between align-items-center border-bottom py-1">
+                    <span>@task.TaskName (Due: @task.DueDate.ToShortDateString())</span>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Update</a>
+                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-5 border p-3">
+            <h5 class="text-secondary">Quadrant IV</h5>
+            @foreach (var task in Model.Where(t => t.Quadrant == 4 && !t.Completed))
+            {
+                <div class="d-flex justify-content-between align-items-center border-bottom py-1">
+                    <span>@task.TaskName (Due: @task.DueDate.ToShortDateString())</span>
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@task.Id" class="btn btn-sm btn-warning">Update</a>
+                        <a asp-action="Delete" asp-route-id="@task.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
