@@ -16,6 +16,8 @@ namespace Mission08_Team0102_Metler.Models
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         [Required]
-        public bool Completed { get; set; } = false;
+        public int Completed { get; set; } = 0;
     }
+
+   
 }

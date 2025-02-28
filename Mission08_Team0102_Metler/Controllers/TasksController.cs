@@ -41,10 +41,62 @@ namespace Mission08_Team0102_Metler.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
-        public IActionResult Edit()
+        [HttpGet]
+        public IActionResult Edit(int id)
         {
-            return View();
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+
+            ViewBag.CategoryId = new SelectList(
+                            _context.Categories
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.CategoryId.ToString(),
+                        Text = c.CategoryName
+                    })
+                    .ToList(), "Value", "Text");
+
+            return View(task);
         }
+
+        [HttpPost]
+        public IActionResult Edit(Models.Task data)
+        {
+            _context.Tasks.Update(data);
+            _context.SaveChanges();
+
+            return RedirectToAction("Quadrant");
+        }
+
+        public IActionResult Quadrant()
+        {
+            var tasks = _context.Tasks.ToList();
+
+            return View(tasks);
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == id);
+
+            return View(task);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteForm(int TaskId)
+        {
+            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == TaskId);
+
+            if (task == null)
+            {
+                return RedirectToAction("Index", "Home"); // Or another appropriate page
+            }
+
+            _context.Tasks.Remove(task); // Remove task from the database
+            _context.SaveChanges(); // Commit the changes to the database
+
+            return RedirectToAction("Quadrant"); // Redirect to the Index (or another page)
+        }
+
     }
 }
