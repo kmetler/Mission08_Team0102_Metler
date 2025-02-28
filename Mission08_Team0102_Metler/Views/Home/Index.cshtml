@@ -3,6 +3,10 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to Task Manager</h1>
+    <p>Organize your tasks efficiently using the Stephen Covey Time Management Matrix.</p>
+    <div class="mt-4">
+        <a class="btn btn-primary" asp-controller="Tasks" asp-action="Create">Add a New Task</a>
+        <a class="btn btn-secondary" asp-controller="Tasks" asp-action="Quadrants">View Task Quadrants</a>
+    </div>
 </div>
