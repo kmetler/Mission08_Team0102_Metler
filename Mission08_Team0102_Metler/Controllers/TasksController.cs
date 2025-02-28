@@ -20,15 +20,26 @@ namespace Mission08_Team0102_Metler.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            ViewBag.CategoryID = _context.Categories.Select(c => new { c.CategoryId, c.CategoryName });
+            ViewBag.CategoryId = new SelectList(
+                            _context.Categories
+                    .Select(c => new SelectListItem
+                    {
+                        Value = c.CategoryId.ToString(),
+                        Text = c.CategoryName
+                    })
+                    .ToList(), "Value", "Text");
+
+
             return View();
         }
 
         [HttpPost]
         public IActionResult Create(Models.Task data)
         {
+            _context.Tasks.Add(data);
+            _context.SaveChanges();
 
-            return View();
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult Edit()
