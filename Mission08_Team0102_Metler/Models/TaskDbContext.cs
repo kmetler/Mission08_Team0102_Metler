@@ -13,6 +13,7 @@ namespace Mission08_Team0102_Metler.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // auto fill the category table with values
             modelBuilder.Entity<Category>().HasData(
                 new Category { CategoryId = 1, CategoryName = "Home" },
                 new Category { CategoryId = 2, CategoryName = "School" },

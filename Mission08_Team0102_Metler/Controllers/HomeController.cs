@@ -6,8 +6,10 @@ namespace Mission08_Team0102_Metler.Controllers
 {
     public class HomeController : Controller
     {
+        // store the repository instance for accessing task data
         private ITaskRepository _repo;
 
+        // repository pattern
         public HomeController(ITaskRepository temp)
         {
             _repo = temp;

@@ -2,6 +2,7 @@
 
 namespace Mission08_Team0102_Metler.Models
 {
+    // make category table with everything required
     public class Category
     {
         [Key]
