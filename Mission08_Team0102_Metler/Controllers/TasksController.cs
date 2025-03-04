@@ -10,9 +10,9 @@ namespace Mission08_Team0102_Metler.Controllers
 {
     public class TasksController : Controller
     {
-        private readonly TaskDbContext _context;
+        private readonly ITaskRepository _context;
 
-        public TasksController(TaskDbContext context)
+        public TasksController(ITaskRepository context)
         {
             _context = context;
         }
@@ -36,8 +36,7 @@ namespace Mission08_Team0102_Metler.Controllers
         [HttpPost]
         public IActionResult Create(Models.Task data)
         {
-            _context.Tasks.Add(data);
-            _context.SaveChanges();
+            _context.AddTask(data);
 
             return RedirectToAction("Index", "Home");
         }
@@ -61,8 +60,8 @@ namespace Mission08_Team0102_Metler.Controllers
         [HttpPost]
         public IActionResult Edit(Models.Task data)
         {
-            _context.Tasks.Update(data);
-            _context.SaveChanges();
+            _context.UpdateTask(data);
+            
 
             return RedirectToAction("Quadrant");
         }
@@ -85,15 +84,7 @@ namespace Mission08_Team0102_Metler.Controllers
         [HttpPost]
         public IActionResult DeleteForm(int TaskId)
         {
-            var task = _context.Tasks.FirstOrDefault(t => t.TaskId == TaskId);
-
-            if (task == null)
-            {
-                return RedirectToAction("Index", "Home"); // Or another appropriate page
-            }
-
-            _context.Tasks.Remove(task); // Remove task from the database
-            _context.SaveChanges(); // Commit the changes to the database
+            _context.DeleteTask(TaskId);
 
             return RedirectToAction("Quadrant"); // Redirect to the Index (or another page)
         }

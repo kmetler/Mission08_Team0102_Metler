@@ -21,5 +21,7 @@ namespace Mission08_Team0102_Metler.Models
                 new Category { CategoryId = 4, CategoryName = "Church" }
             );
         }
+
+      
     }
 }
