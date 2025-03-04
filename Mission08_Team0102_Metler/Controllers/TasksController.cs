@@ -10,6 +10,7 @@ namespace Mission08_Team0102_Metler.Controllers
 {
     public class TasksController : Controller
     {
+        //Initialize the session through the interface
         private readonly ITaskRepository _context;
 
         public TasksController(ITaskRepository context)
@@ -17,6 +18,7 @@ namespace Mission08_Team0102_Metler.Controllers
             _context = context;
         }
 
+        //Create action
         [HttpGet]
         public IActionResult Create()
         {
@@ -33,6 +35,7 @@ namespace Mission08_Team0102_Metler.Controllers
             return View();
         }
 
+        //Create post action
         [HttpPost]
         public IActionResult Create(Models.Task data)
         {
@@ -40,6 +43,8 @@ namespace Mission08_Team0102_Metler.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+
+        //Edit to pull up the edit field
         [HttpGet]
         public IActionResult Edit(int id)
         {
@@ -57,6 +62,8 @@ namespace Mission08_Team0102_Metler.Controllers
             return View(task);
         }
 
+
+        //edit to update db
         [HttpPost]
         public IActionResult Edit(Models.Task data)
         {
@@ -66,6 +73,8 @@ namespace Mission08_Team0102_Metler.Controllers
             return RedirectToAction("Quadrant");
         }
 
+
+        //to pull up quadrant view
         public IActionResult Quadrant()
         {
             var tasks = _context.Tasks.ToList();
@@ -73,6 +82,8 @@ namespace Mission08_Team0102_Metler.Controllers
             return View(tasks);
         }
 
+
+        //To pull up delete page
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -81,6 +92,8 @@ namespace Mission08_Team0102_Metler.Controllers
             return View(task);
         }
 
+
+        //To actually delete from db
         [HttpPost]
         public IActionResult DeleteForm(int TaskId)
         {
