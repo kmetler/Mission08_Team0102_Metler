@@ -33,11 +33,16 @@
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId"></select>
                 <span asp-validation-for="CategoryId" class="text-danger"></span>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Completed" /> @Html.DisplayNameFor(model => model.Completed)
-                </label>
+            <div class="form-group">
+                <label for="Completed">Completed</label>
+                <select asp-for="Completed" class="form-control" required>
+                    <option value="" disabled selected>Select Yes or No</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+                <span asp-validation-for="Completed" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
